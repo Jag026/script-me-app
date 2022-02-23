@@ -1,0 +1,28 @@
+extends layout.pug
+
+block content
+  if errors
+    div(class='alert alert-danger' role='alert')
+      p The following error(s) occurred:
+      ul
+        each error in errors
+          li= error
+  form(action=`/part/edit/${part.id}` method='post' class='addPartForm' style={'margin-top': '20px'})
+    input(type='hidden' id='returnScriptId' name='returnScriptId' value=`${part.scriptId}`)
+    input(type='hidden' name='_csrf' value=csrfToken)
+    div(class='form-group')
+      label(for='title') Title
+      input(type='text' id='title' name='title' value=part.title class='form-control')
+    div(class='form-group')
+      label(for='body') Body
+      input(type='text' id='body' name='body' value=part.body class='form-control')
+    div(class='py-4')
+      button(type='submit' class='btn btn-primary') Update Part
+      a(href='/user' class='btn btn-warning ml-2') Cancel
+
+  div(class='editResponses')
+   each response in responses
+    a(type='button' href=`/response/edit/${part.id}` class='responseButton')= `${response.body}`
+  br
+  a(type='button' href=`/response/edit/${part.id}` class='editResponsesButton') Edit Responses
+

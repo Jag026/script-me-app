@@ -1,0 +1,12 @@
+extends layout.pug
+
+block content
+   div(class='partDesign')
+    h5(class='partTitle')= part.title
+    p(class='partBody')=  part.body
+    div(style={display: 'flex', 'justify-content': 'center', 'align-items': 'center'})
+     each response in responses
+       if response.partId == part.id
+        div(class='partPreviewButton')
+         a(href=`/part/${response.linkedPartId}/preview`)= response.body
+   a(class='partPreviewButton' href=`/script/${part.scriptId}` style={'max-width': '180px'}) Return To Script

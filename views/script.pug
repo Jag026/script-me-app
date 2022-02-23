@@ -1,0 +1,55 @@
+extends layout.pug
+
+block content
+  h4(class='scriptTitle')= script.title
+  div(style={display: 'flex'})
+    if `${parts.length}` > 0
+     a(class='btn btn-primary' href=`/script/edit/${script.id}` role='button') Edit
+     a(class='btn btn-danger ml-2' href=`script/delete/${script.id}` role='button') Delete
+     a(class='btn btn-danger ml-2' href=`/part/${firstPart.id}/preview` role='button') Preview Script
+  br
+  br
+  each part in parts
+   div(class='partDesign')
+    h5(class="partTitle")= part.title
+    p(class='partBody')=  part.body
+    div(class='responses')
+     each response in responses
+       if response.partId == part.id
+        div(style={margin: '15px'})
+         a(class='btn btn-primary' href=`/part/${response.linkedPartId}/preview`)= response.body
+    div(style={display: 'flex', 'align-items': 'flex-end'})
+     div(class='py-4' style={"margin-right": "8px"})
+       form(action=`/part/edit/${part.id}` method='get')
+        input(type='hidden' name='_csrf' value=csrfToken)
+        input(type='hidden' name='returnScriptId' value=`${script.id}`)
+        button(type='text') Edit Part
+     div(class='py-4')
+       form(action=`/part/delete/${part.id}` method='post')
+        input(type='hidden' name='_csrf' value=csrfToken)
+        input(type='hidden' name='returnScriptId' value=`${script.id}`)
+        button(type='text') Delete Part
+          
+          
+
+  if errors
+    div(class='alert alert-danger' role='alert')
+      p The following error(s) occurred:
+      ul
+        each error in errors
+          li= error
+  form(class='addPartForm' action='/part/add' method='post')
+    input(type='hidden' name='_csrf' value=csrfToken)
+    input(type='hidden' id='scriptId' name='scriptId' value=`${script.id}`)
+    div(class='form-group')
+      label(for='title') Title
+      input(type='text' id='title' name='title' value="" class='form-control')
+    div(class='form-group')
+      label(for='body') Body
+      input(type='text' id='body' name='body' value="" class='form-control')
+    div(class='py-4')
+      button(type='submit' class='btn btn-primary') Add Part
+  div(class='py-4')
+   br
+   br
+   br

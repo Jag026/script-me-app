@@ -1,0 +1,156 @@
+HTML {
+    height: 100%
+}
+
+body {
+    background-image: linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100%;
+    background-attachment: fixed;
+}
+
+
+.footerNav {
+    width: 100%;
+    position:fixed;
+    bottom:0;
+    height: 40px;
+    text-decoration: underline;
+    color: white;
+    background-color: #051937;
+}
+
+.scriptDesign {
+    margin-top: 24px;
+    margin-bottom: 50px;
+    background-color: #051937; 
+    height: 140px;
+    padding: 14px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset
+}
+
+.scriptTitle {
+    color: white;
+    font-family: Trebuchet, sans-serif;
+}
+
+.scriptButtonDiv {
+    color: #051937;
+    font-family: Trebuchet, sans-serif;
+    margin-top: 20px;
+}
+
+.partDesign {
+    margin-top: 24px;
+    margin-bottom: 50px;
+    background-color: #efedf2; 
+    height: 280px;
+    padding: 14px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset
+}
+
+.partTitle {
+    display: flex; 
+    justify-content: center;
+    text-decoration: underline;
+}
+
+
+.partBody {
+    display: flex; 
+    justify-content: center
+}
+
+.addPartForm {
+    padding: 25px;
+    margin-bottom: 30px;
+    background-color: #051937;
+    color: white;
+}
+
+.responses {
+    display: flex; 
+    justify-content: center;
+    align-items: center
+}
+
+.loginForm {
+    margin-top: 40px;
+    width: 40%;
+}
+
+.loginFormText {
+    color:white;
+}
+
+.editResponses {
+    margin-top: 40px;
+    display: flex;
+}
+
+
+.responseButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #051937;
+    color: white;
+    height: 40px;
+    min-width: 8%;
+    padding-right: 8px;
+    padding-left: 8px;
+    border-radius: 10%;
+    margin-right: 14px;
+}
+
+.editResponsesButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #8bd80f;
+    color: #051937;
+    width: 20%;
+    height: 40px;
+    border-radius: 10%;
+    margin-right: 14px;
+    margin-top: 10px;
+}
+
+.response {
+    margin: 8px;
+    border: 1px solid;
+    padding: 6px;
+    width: 40%;
+    background-color: #051937;
+    color: white;
+}
+
+.updateResponsesButton {
+    background-color: #6aff2e;
+    color: #051937;
+    border-radius: 10%;
+    margin-left: 12px;
+}
+
+.deleteResponsesButton {
+    background-color: #ee9b00;
+    color: #051937;
+    border-radius: 10%;
+}
+
+.partPreviewButton {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #051937;
+    border-radius: 10%;
+    min-width: 70px;
+    height: 40px;
+    border-radius: 12px;
+    margin-right: 14px;
+    margin-top: 10px;
+}

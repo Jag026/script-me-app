@@ -1,0 +1,10 @@
+extends layout.pug
+
+block content
+  h3= script.title
+  div(class='py-4')
+    p Proceed with deleting this Script?
+    form(action=`/script/delete/${script.id}` method='post')
+     input(type='hidden' name='_csrf' value=csrfToken)
+     button(type='submit' class='btn btn-primary') Delete Script
+     a(href='/user' class='btn btn-warning ml-2') Cancel

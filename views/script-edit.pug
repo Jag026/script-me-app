@@ -1,0 +1,17 @@
+extends layout.pug
+
+block content
+  if errors
+    div(class='alert alert-danger' role='alert')
+      p The following error(s) occurred:
+      ul
+        each error in errors
+          li= error
+  form(action=`/script/edit/${script.id}` method='post' style={'margin-top': '30px'})
+    input(type='hidden' name='_csrf' value=csrfToken)
+    div(class='form-group')
+      label(for='title' style={color: 'white'}) Title
+      input(type='text' id='title' name='title' value=script.title class='form-control')
+    div(class='py-4')
+      button(type='submit' class='btn btn-primary') Update Script
+      a(href='/user' class='btn btn-warning ml-2') Cancel

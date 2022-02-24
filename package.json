@@ -1,9 +1,10 @@
 {
   "name": "monster-match",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
+    "sequelize": "sequelize",
+    "sequelize-cli": "sequelize-cli",
     "start": "per-env",
     "start:development": "nodemon -r dotenv/config ./bin/www",
     "start:production": "node ./bin/www"
@@ -31,5 +32,6 @@
     "dotenv-cli": "^4.0.0",
     "nodemon": "^2.0.14",
     "sequelize-cli": "^6.4.1"
-  }
+  },
+  "description": ""
 }

@@ -1,0 +1,131 @@
+# validation-result
+Wrapper for unified client-server and function-function communication with methods to simplify validation and error handling.
+
+```js
+function ValidationResult(data) {
+    // Wrapped data
+    this.data = data;
+    // Validity flag
+    this.isValid;
+    // Lists of messages
+    this.errors = [];
+    this.warnings = [];
+    this.messages = [];
+
+    // ...validation functions...
+}
+```
+
+
+## Installation
+    npm install validation-result
+
+## Usage
+Include validation-result in your file:
+```js
+var ValidationResult = require('validation-result');
+```
+
+Then use it to wrap any object
+```js
+var validation = new ValidationResult(data);
+```
+
+### Basic functions and properties
+```js 
+// Check if data are valid
+if (!validation.isValid) {
+    // Data are not valid
+}
+
+// Add error to list of errors
+// sets isValid to false
+validation.addError(error);
+
+// Add message to message list
+validation.addMessage(message);
+
+// Add warning to warnings list
+validation.addWarning(warning);
+
+// Append other validations
+if (!validation.append(otherValidation)) {
+    // Data are not valid
+}
+```
+
+### Validation functions
+Each validation function returns its result. If the result is false, `validation.addError(error)` is called.
+```js
+// Check if given property is number
+validation.isNumber('path.to.property', error));
+
+// Check if given property is lesser or equal than given value
+validation.isLesserOrEqual('path.to.property', value, error));
+
+// Check if given property is greater or equal than given value
+validation.isGreaterOrEqual('path.to.property', value, error));
+
+// Check if given property is equal to given value
+validation.isEqual('path.to.property', value, error));
+
+// Check if given expression is true
+validation.isTrue(expression, error);
+
+// Check if given property is not empty
+validation.notEmpty('path.to.property', error));
+
+// Check if given property is defined
+validation.isDefined('path.to.property', error));
+
+// Check if given property matches given regex
+validation.matches('path.to.property', regex, error));
+
+// Check if given property contains given value
+validation.contains('path.to.property', value, error));
+```
+
+## Example
+```js
+// Require module
+var ValidationResult = require('validation-result');
+
+// Create example data
+var user = {
+    Name: "Bob",
+    Age: 17,
+    Local: {
+        Password: "ucantgetme"
+    }
+}
+
+// Wrap user in validation
+var validation = new ValidationResult(user);
+
+// Make validation controls
+validation.notEmpty('Name', 'Name field is required');
+validation.isGreaterOrEqual('Age', 18, 'You are too young');
+validation.isDefined('Hobbies', 'Don\' you have a hobby?');
+
+// Does it make sense to keep going?
+if (!validation.isValid) {
+    return validation;
+}
+
+// Nested validation to avoid access to undefined properties
+// If we do not want to append error message, dont
+if (validation.isDefined('Local')) {
+    validation.notEmpty('Local.Password', 'Password field is required');
+}
+
+// Use your own checks
+if (myMoodIsBlue) {
+    validation.addError('You shall not pass');
+}
+
+// Return validation
+return validation;
+```
+
+## Testing
+    npm test

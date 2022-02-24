@@ -1,0 +1,33 @@
+var should = require('chai').should();
+var ValidationResult = require('../index');
+
+// Create test object
+var validation = new ValidationResult({
+    Name: "Bob",
+    Age: 17,
+    Local: {
+        Password: "ucantgetme"
+    }
+});
+
+describe('Example test', function() {
+    it("validation.notEmpty('Name', 'Name field is required')", function() {
+        validation.notEmpty('Name', 'Name field is required').should.equal(true);
+    });
+
+    it("validation.isGreaterOrEqual('Age', 18, 'You are too young')", function() {
+        validation.isGreaterOrEqual('Age', 18, 'You are too young').should.equal(false);
+    });
+
+    it("validation.isDefined('Hobbies', 'Don\' you have a hobby?')", function() {
+        validation.isDefined('Hobbies', 'Don\' you have a hobby?').should.equal(false);
+    });
+
+    it("validation.isDefined('Local')", function() {
+        validation.isDefined('Local').should.equal(true);
+    });
+
+    it("validation.notEmpty('Local.Password', 'Password field is required')", function() {
+        validation.notEmpty('Local.Password', 'Password field is required').should.equal(true);
+    });
+})

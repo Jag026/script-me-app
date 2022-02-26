@@ -61,7 +61,6 @@ router.get('/add', requireAuth, csrfProtection, asyncHandler(async(req, res) => 
     });
 }));
 
-
 router.post('/add', requireAuth, csrfProtection, scriptValidators,
     asyncHandler(async (req, res) => {
         const {

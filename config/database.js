@@ -1,4 +1,6 @@
 const config = require("./index");
+const pg = require('pg');
+
 const db = config.db;
 const username = db.username;
 const password = db.password;

@@ -25,6 +25,7 @@
     "pg": "^8.7.3",
     "pug": "^3.0.2",
     "sequelize": "^5.22.5",
+    "sequelize-cli": "^6.4.1",
     "validation-result": "^1.0.0"
   },
   "devDependencies": {

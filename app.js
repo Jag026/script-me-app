@@ -4,7 +4,6 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const session = require('express-session');
 const path = require('path');
-const pg = require('pg');
 
 const { sessionSecret } = require('./config');
 const { restoreUser } = require('./auth');

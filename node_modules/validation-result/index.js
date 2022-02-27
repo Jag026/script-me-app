@@ -1,0 +1,244 @@
+var resolvePath = require('object-resolve-path');
+
+/**
+ *  Validation wrapper to hold data with validity
+ *  flag, messages, warnings, errors and validation 
+ *  methods.
+ *  
+ *  @param {any} data
+ */
+function ValidationResult(data) {
+    // Set data
+    this.data = data;
+    // Initialize validation flag
+    this.isValid = true;
+    // Initialize lists
+    this.messages = [];
+    this.errors = [];
+    this.warnings = [];
+}
+
+/**
+ * Add error to errors list. Also sets validity
+ * flag to false.
+ * 
+ * @param {any} error
+ */
+ValidationResult.prototype.addError = function(error)    {
+    if (error)
+        this.errors.push(error);
+    this.isValid = false;
+}
+
+/**
+ * Add warning to warnings list.
+ * 
+ * @param {any} warning
+ */
+ValidationResult.prototype.addWarning = function(warning) {
+    this.warnings.push(warning);
+}
+
+/**
+ * Add message to messages list.
+ * 
+ * @param {any} message
+ */
+ValidationResult.prototype.addMessage = function(message) {
+    this.messages.push(message);
+}
+
+/**
+ * Append other validation. Messages, errors and warnings
+ * are concatenated. Data stay the same and validity flag
+ * is set based on both validations. If any of them is false,
+ * then resulting validity is set to false.
+ * 
+ * @param {ValidationResult} validation
+ * @return {boolean} result
+ */
+ValidationResult.prototype.append = function(validation) {
+    // Concatenate arrays
+    this.errors = this.errors.concat(validation.errors);
+    this.warnings = this.warnings.concat(validation.warnings);
+    this.messages = this.messages.concat(validation.messages);
+
+    // Set validity flag
+    this.isValid = this.isValid && validation.isValid;
+
+    // Return validity flag
+    return this.isValid;
+}
+
+/**
+ * Check if property of given path is a number.
+ * 
+ * @param {string} propertyPath
+ * @param {any} error
+ * @return {boolean} result
+ */
+ValidationResult.prototype.isNumber = function(propertyPath, error)    {
+    // Check if property is a number
+    if (isNaN(resolvePath(this.data, propertyPath))) {
+        this.addError(error);
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * Check if property of given path is lesser or equal
+ * than given value.
+ * 
+ * @param {string} propertyPath
+ * @param {number} value
+ * @param {any} error 
+ * 
+ * @return {boolean} result
+ */
+ValidationResult.prototype.isLesserOrEqual = function(propertyPath, value, error) {
+    // Check if property is lesser or equal
+    if (!(resolvePath(this.data, propertyPath) <= value)) {
+        this.addError(error);
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * Check if property of given path is greater or equal
+ * than given value.
+ * 
+ * @param {string} propertyPath
+ * @param {number} value
+ * @param {any} error 
+ * 
+ * @return {boolean} result
+ */
+ValidationResult.prototype.isGreaterOrEqual = function(propertyPath, value, error) {
+    // Check if property is greater or equal
+    if (!(resolvePath(this.data, propertyPath) >= value)) {
+        this.addError(error);
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * Check if property of given path is equal
+ * as given value.
+ * 
+ * @param {string} propertyPath
+ * @param {number} value
+ * @param {any} error
+ * 
+ * @return {boolean} result
+ */
+ValidationResult.prototype.isEqual = function(propertyPath, value, error) {
+    // Check if property is equal
+    if (!(resolvePath(this.data, propertyPath) === value)) {
+        this.addError(error);
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * Check if given expression is true
+ * 
+ * @param {boolean} expression
+ * @param {any} error 
+ * 
+ * @return {boolean} result
+ */
+ValidationResult.prototype.isTrue = function(expression, error)   {
+    // Check result of given expression
+    if (!expression) {
+        this.addError(error);
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * Check if property given by path is empty. If so, set error.
+ * 
+ * @param {string} propertyPath
+ * @param {any} error
+ * 
+ * @return {boolean} result
+ */
+ValidationResult.prototype.notEmpty = function(propertyPath, error) {
+    // Check if property is empty
+    var value = resolvePath(this.data, propertyPath);
+    if (!value || value.length === 0) {
+        this.addError(error);
+        return false;
+    }
+    return true;
+}
+
+/**
+ * Check if property of given path is defined.
+ * 
+ * @param {string} propertyPath
+ * @param {any} error
+ * 
+ * @return {boolean} result
+ */
+ValidationResult.prototype.isDefined = function(propertyPath, error) {
+    // Check if property is defined
+    if (typeof resolvePath(this.data, propertyPath) === 'undefined') {
+        this.addError(error);
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * Check if property of given path matches given regex.
+ * 
+ * @param {string} propertyPath
+ * @param {string} regex
+ * @param {any} error
+ * 
+ * @return {boolean} result
+ */
+ValidationResult.prototype.match = function(propertyPath, regex, error) {
+    // Check if property matches given regex
+    var re = new RegExp(regex);
+    if (!(re.test(resolvePath(this.data, propertyPath)))) {
+        this.addError(error);
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * Check if property of given path contains given value.
+ * 
+ * @param {string} propertyPath
+ * @param {string} regex
+ * @param {any} error
+ * 
+ * @return {boolean} result
+ */
+ValidationResult.prototype.contains = function(propertyPath, value, error) {
+    // Check if property contains given value
+    if (resolvePath(this.data, propertyPath).indexOf(value) === -1) {
+        this.addError(error);
+        return false;
+    }
+
+    return true;
+}
+
+// Export module
+module.exports = ValidationResult;

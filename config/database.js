@@ -1,5 +1,4 @@
 const config = require("./index");
-const pg = require('pg');
 
 const db = config.db;
 const username = db.username;
@@ -13,12 +12,12 @@ module.exports = {
     password,
     database,
     host,
-    dialect: "postgres",
+    dialect: "pg",
     seederStorage: "sequelize"
   },
   production: {
     use_env_variable: 'DATABASE_URL',
-    dialect: 'postgres',
+    dialect: 'pg',
     seederStorage: 'sequelize',
   }
 };

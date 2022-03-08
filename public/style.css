@@ -2,14 +2,9 @@ HTML {
     height: 100%
 }
 
-body {
-    background-image: linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 100%;
-    background-attachment: fixed;
+.bodyTheme {
+    background-color: #ECECEC;    
 }
-
 
 .footerNav {
     width: 100%;
@@ -18,21 +13,21 @@ body {
     height: 40px;
     text-decoration: underline;
     color: white;
-    background-color: #051937;
+    background-color: #66FCF1;
 }
 
 .scriptDesign {
     margin-top: 24px;
     margin-bottom: 50px;
-    background-color: #051937; 
+    background-color: white; 
     height: 140px;
     padding: 14px;
-    border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset
+    border-radius: 2px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px, rgba(0, 0, 0, 0.3) 0px 7px 13px 1px, rgba(0, 0, 0, 0.2) 0px 0px 0px inset
 }
 
 .scriptTitle {
-    color: white;
+    color: black;
     font-family: Trebuchet, sans-serif;
 }
 
@@ -83,7 +78,7 @@ body {
 }
 
 .loginFormText {
-    color:white;
+    color:#05386B;
 }
 
 .editResponses {

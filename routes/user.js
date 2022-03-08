@@ -169,4 +169,21 @@ router.post('/logout', (req, res) => {
     res.redirect('/user/login');
 });
 
+router.get('/demo', csrfProtection,
+    asyncHandler(async (req, res) => {
+        const emailAddress = 'cb0f0f3c2f7af8ff86ae829cca676d8edd46e0f718d278237403b07960df08fa@fakeemail.com'
+        const user = await db.User.findOne({ where: { emailAddress } });
+        const password = 'Dumyypassword234523!'
+        const passwordMatch = await bcrypt.compare(password, user.hashedPassword.toString());
+
+        if (passwordMatch) {
+            // If the password hashes match, then login the user
+            // and redirect them to the default route.
+            // TODO Login the user.
+            loginUser(req, res, user);
+            return res.redirect('/user');
+        }
+    }));
+
+
 module.exports = router;

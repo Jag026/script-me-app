@@ -10,7 +10,7 @@ block content
   form(action='/script/add' method='post' style={'margin-top': '30px'})
     input(type='hidden' name='_csrf' value=csrfToken)
     div(class='form-group')
-      label(for='title' style={color: 'white'}) Title
+      label(for='title') Title
       input(type='text' id='title' name='title' value=script.title class='form-control')
     div(class='py-4')
       button(type='submit' class='btn btn-primary') Add Script Name

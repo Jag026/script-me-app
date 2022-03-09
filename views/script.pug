@@ -4,8 +4,8 @@ block content
   br
   h4(class='scriptTitle')= script.title
   div(style={display: 'flex'})
+   a(href=`/script/edit/${script.id}`) Edit Title
     if `${parts.length}` > 0
-     a(href=`/script/edit/${script.id}`) Edit Title
      a(href=`/part/${firstPart.id}/preview` style={'margin-left': '20px'}) Preview Script
 
   each part in parts

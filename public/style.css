@@ -12,6 +12,7 @@ HTML {
     width: 100%;
     position:fixed;
     bottom:0;
+    left:0;
     height: 40px;
     text-decoration: underline;
     color: white;
@@ -57,7 +58,8 @@ HTML {
 
 .partBody {
     display: flex; 
-    justify-content: center
+    justify-content: center;
+    color: black;
 }
 
 .addPartForm {

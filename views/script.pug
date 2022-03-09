@@ -1,14 +1,13 @@
 extends layout.pug
 
 block content
+  br
   h4(class='scriptTitle')= script.title
   div(style={display: 'flex'})
     if `${parts.length}` > 0
-     a(class='btn btn-primary' href=`/script/edit/${script.id}` role='button') Edit
-     a(class='btn btn-danger ml-2' href=`script/delete/${script.id}` role='button') Delete
-     a(class='btn btn-danger ml-2' href=`/part/${firstPart.id}/preview` role='button') Preview Script
-  br
-  br
+     a(href=`/script/edit/${script.id}`) Edit Title
+     a(href=`/part/${firstPart.id}/preview` style={'margin-left': '20px'}) Preview Script
+
   each part in parts
    div(class='partDesign')
     h5(class="partTitle")= part.title
@@ -18,27 +17,31 @@ block content
        if response.partId == part.id
         div(style={margin: '15px'})
          a(class='btn btn-primary' href=`/part/${response.linkedPartId}/preview`)= response.body
-    div(style={display: 'flex', 'align-items': 'flex-end'})
-     div(class='py-4' style={"margin-right": "8px"})
-       form(action=`/part/edit/${part.id}` method='get')
-        input(type='hidden' name='_csrf' value=csrfToken)
-        input(type='hidden' name='returnScriptId' value=`${script.id}`)
-        button(type='text') Edit Part
-     div(class='py-4')
-       form(action=`/part/delete/${part.id}` method='post')
-        input(type='hidden' name='_csrf' value=csrfToken)
-        input(type='hidden' name='returnScriptId' value=`${script.id}`)
-        button(type='text') Delete Part
-          
-          
+   div(style={display: 'flex', 'align-items': 'flex-end'})
+    div(class='py-4' style={"margin-right": "8px"} )
+      form(action=`/part/edit/${part.id}` method='get' id="myform")
+       input(type='hidden' name='_csrf' value=csrfToken)
+       input(type='hidden' name='returnScriptId' value=`${script.id}`)
+       button(class='btn btn-primary' type='text' style={'background-color': '#080F5B'}) Edit Part
+    div(class='py-4')
+      form(action=`/part/delete/${part.id}` method='post')
+       input(type='hidden' name='_csrf' value=csrfToken)
+       input(type='hidden' name='returnScriptId' value=`${script.id}`)
+       button(class='btn btn-primary' type='text' style={'background-color': '#fec107', 'color': '#080F5B'}) Delete Part
+  br
+  br
+  br     
+  br
+  br
 
+  h3 Add Part
   if errors
     div(class='alert alert-danger' role='alert')
       p The following error(s) occurred:
       ul
         each error in errors
           li= error
-  form(class='addPartForm' action='/part/add' method='post')
+  form(class='partDesign' action='/part/add' method='post')
     input(type='hidden' name='_csrf' value=csrfToken)
     input(type='hidden' id='scriptId' name='scriptId' value=`${script.id}`)
     div(class='form-group')

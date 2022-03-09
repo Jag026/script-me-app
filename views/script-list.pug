@@ -2,18 +2,20 @@ extends layout.pug
 
 block content
   div(class='py-3')
-    a(class='btn btn-success' href=`/script/add` role='button') Add Script
   br
   br
-  if scripts && scripts.length > 0
+  div(style={display: 'flex', 'justify-content': 'space-between'})
     h4 Your Scripts: 
+    a(class='btn btn-success' href=`/script/add` role='button') Add Script
+
+  if scripts && scripts.length > 0
     each script in scripts
      div(class='scriptDesign')
       h4(class='scriptTitle')= script.title
         div(class="scriptButtonDiv")
-          a(class='btn btn-primary' style={"margin-right": '14px'} href=`/script/${script.id}` role='button') View
-          a(class='btn btn-primary' style={"margin-right": '14px'} href=`script/edit/${script.id}` role='button') Edit
-          a(class='btn btn-danger ml-2' style={"margin-right": '14px'} href=`script/delete/${script.id}` role='button') Delete
+          a(class='btn' style={"margin-right": '14px', 'color': 'white', 'background-color': '#080F5B'} href=`/script/${script.id}` role='button') View
+          a(class='btn' style={"margin-right": '14px', 'color': 'white', 'background-color': '#080F5B'} href=`script/edit/${script.id}` role='button') Edit
+          a(class='btn' style={"margin-right": '14px', 'background-color': '#fec107'} href=`script/delete/${script.id}` role='button') Delete
   else
      p: em You don't have any scripts!
 

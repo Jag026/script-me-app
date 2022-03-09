@@ -1,13 +1,15 @@
 extends layout.pug
 
 block content
+  br
+  h3 Update Part
   if errors
     div(class='alert alert-danger' role='alert')
       p The following error(s) occurred:
       ul
         each error in errors
           li= error
-  form(action=`/part/edit/${part.id}` method='post' class='addPartForm' style={'margin-top': '20px'})
+  form(action=`/part/edit/${part.id}` method='post' class='partDesign' style={'margin-top': '20px'})
     input(type='hidden' id='returnScriptId' name='returnScriptId' value=`${part.scriptId}`)
     input(type='hidden' name='_csrf' value=csrfToken)
     div(class='form-group')

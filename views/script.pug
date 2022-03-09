@@ -2,12 +2,12 @@ extends layout.pug
 
 block content
   br
-  h4(class='scriptTitle')= script.title
+  h2(class='scriptTitle')= script.title
   div(style={display: 'flex'})
    a(href=`/script/edit/${script.id}`) Edit Title
     if `${parts.length}` > 0
      a(href=`/part/${firstPart.id}/preview` style={'margin-left': '20px'}) Preview Script
-
+  br
   each part in parts
    div(class='partDesign')
     h5(class="partTitle")= part.title

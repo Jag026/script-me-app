@@ -16,7 +16,7 @@ block content
      each response in responses
        if response.partId == part.id
         div(style={margin: '15px'})
-         a(class='btn btn-primary' href=`/part/${response.linkedPartId}/preview`)= response.body
+         a(class='btn btn-primary' href=`/part/${response.linkedPartId}/preview` style={'background-color': '#080F5B'})= response.body
    div(style={display: 'flex', 'align-items': 'flex-end'})
     div(class='py-4' style={"margin-right": "8px"} )
       form(action=`/part/edit/${part.id}` method='get' id="myform")
@@ -51,7 +51,7 @@ block content
       label(for='body') Body
       input(type='text' id='body' name='body' value="" class='form-control')
     div(class='py-4')
-      button(type='submit' class='btn btn-primary') Add Part
+      button(type='submit' class='btn btn-primary' style={'background-color': '#080F5B'}) Add Part
   div(class='py-4')
    br
    br

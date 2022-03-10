@@ -7,6 +7,6 @@ block content
     div(style={display: 'flex', 'justify-content': 'center', 'align-items': 'center'})
      each response in responses
        if response.partId == part.id
-        div(class='partPreviewButton')
-         a(href=`/part/${response.linkedPartId}/preview`)= response.body
-   a(class='partPreviewButton' href=`/script/${part.scriptId}` style={'max-width': '180px'}) Return To Script
+        div
+         a(class='btn btn-primary' href=`/part/${response.linkedPartId}/preview` style={'background-color': '#080f5b'})= response.body
+   a(class='btn btn-primary' href=`/script/${part.scriptId}` style={'background-color': '#080f5b', 'margin-top': '16px'}) Return To Script

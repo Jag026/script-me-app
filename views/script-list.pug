@@ -4,18 +4,19 @@ block content
   div(class='py-3')
   br
   br
-  div(style={display: 'flex', 'justify-content': 'space-between'})
+  div(style={display: 'flex', 'justify-content': 'space-between', 'max-width': '900px', 'margin': '0 auto'})
     h4 Your Scripts: 
     a(class='btn btn-success' href=`/script/add` role='button') Add Script
-
+  br  
+  
   if scripts && scripts.length > 0
     each script in scripts
-     div(class='scriptDesign')
-      h4(class='scriptTitle')= script.title
-        div(class="scriptButtonDiv")
-          a(class='btn' style={"margin-right": '14px', 'color': 'white', 'background-color': '#080F5B'} href=`/script/${script.id}` role='button') View
-          a(class='btn' style={"margin-right": '14px', 'color': 'white', 'background-color': '#080F5B'} href=`script/edit/${script.id}` role='button') Edit
-          a(class='btn' style={"margin-right": '14px', 'background-color': '#fec107'} href=`script/delete/${script.id}` role='button') Delete
+      div(class='scriptDesign')
+       h4(class='scriptTitle')= script.title
+         div(class="scriptButtonDiv")
+           a(class='btn' style={"margin-right": '14px', 'color': 'white', 'background-color': '#080F5B'} href=`/script/${script.id}` role='button') View
+           a(class='btn' style={"margin-right": '14px', 'color': 'white', 'background-color': '#080F5B'} href=`script/edit/${script.id}` role='button') Edit
+           a(class='btn' style={"margin-right": '14px', 'background-color': '#fec107'} href=`script/delete/${script.id}` role='button') Delete
   else
      p: em You don't have any scripts!
 

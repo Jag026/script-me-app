@@ -26,7 +26,7 @@ router.get('/edit/:id(\\d+)', requireAuth, csrfProtection,
         const partId = parseInt(req.params.id, 10);
         const part = await db.Part.findByPk(partId);
         const idForScript = part.scriptId;
-        const responses = await db.Response.findAll({ where: { partId: req.params.id }, order: [['createdAt', 'ASC']] });
+        const responses = await db.Response.findAll({ where: { partId: req.params.id }, order: [['id', 'DESC']] });
         const parts = await db.Part.findAll({ where: { scriptId: idForScript }, order: [['createdAt', 'ASC']] });
 
         res.render('response-edit', {

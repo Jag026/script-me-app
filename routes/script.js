@@ -30,7 +30,7 @@ router.get('/:id(\\d+)', requireAuth, csrfProtection,
         const script = await db.Script.findByPk(id);
         //filters parts to match scriptId
         const parts = await db.Part.findAll({ where: { scriptId: id }, order: [['createdAt', 'ASC']] });
-        const responses = await db.Response.findAll({order: [['createdAt', 'ASC']] });
+        const responses = await db.Response.findAll({order: [['id', 'DESC']] });
         const firstPart = parts[0];
 
         checkPermissions(script, res.locals.user);
@@ -148,5 +148,65 @@ router.post('/delete/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) =
     res.redirect('/user');
 }));
 
+
+
+router.get('/add-template/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => {
+    const scripts = await db.Script.findAll({ where: { userId: res.locals.user.id }, order: [['title', 'ASC']] });
+    const scriptIdToCopy = parseInt(req.params.id, 10);
+    const scriptToCopy = await db.Script.findAll({ where: { id: scriptIdToCopy } });
+
+    //copies the template's script title
+    const title = await scriptToCopy[0].title
+
+    const script = await db.Script.build({
+        userId: res.locals.user.id,
+        title
+    });
+
+   await script.save();
+
+   const newScriptId = await script.id
+
+        //sets an array of parts using the scriptId
+        const partsArr = await db.Part.findAll({ where: { scriptId: newScriptId } });
+    await partsArr.forEach((part) => {
+        async function setParts() {
+            const partObj = await db.Part.build({
+                title: part.title,
+                body: part.body,
+                scriptId: newScriptId
+            });
+            await partObj.save();
+            const newPartId = await 4;
+            //gets the responses for each part and saves a copy to the user
+
+            async function grabResponses(partid) {
+                const responseArr = await db.Response.findAll({ where: { partId: part.id } });
+                console.log(responseArr)
+                await responseArr.forEach((response) => {
+                    async function createResponse() {
+                        const responseObj = await db.Response.build({
+                            body: response.body,
+                            partId: partid,
+                            linkedPartId: partid
+                        })
+                        await responseObj.save();
+                    }
+                    createResponse();
+                    })
+            }
+        
+            await grabResponses(newPartId)
+        }
+        setParts();
+        })
+    
+    /* const script = db.Script.build({
+        userId: res.locals.user.id,
+        title
+    }); */
+
+    res.render('script-list', { scripts });
+}));
 
 module.exports = router;

@@ -12,7 +12,8 @@ const partRoutes = require('./routes/part');
 const scriptRoutes = require('./routes/script');
 const userRoutes = require('./routes/user');
 const responseRoutes = require('./routes/response');
-//
+const templateRoutes = require('./routes/template');
+
 const app = express();
 
 app.set('view engine', 'pug');
@@ -31,6 +32,7 @@ app.use('/', indexRoutes)
 app.use('/part', partRoutes)
 app.use('/script', scriptRoutes)
 app.use('/response', responseRoutes)
+app.use('/template', templateRoutes)
 app.use('/user', userRoutes)
 app.use(express.static(path.join(__dirname)));
 app.use("/styles", express.static(__dirname + '/styles'));

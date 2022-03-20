@@ -37,7 +37,7 @@ router.get('/:id(\\d+)/preview', requireAuth, csrfProtection,
     asyncHandler(async (req, res) => {
         const idForPart = parseInt(req.params.id, 10);
         const part = await db.Part.findByPk(idForPart);
-        const responses = await db.Response.findAll({ where: { partId: idForPart }, order: [['createdAt', 'ASC']] });
+        const responses = await db.Response.findAll({ where: { partId: idForPart }, order: [['id', 'DESC']] });
         res.render('preview-part', {
             idForPart,
             part,
@@ -92,7 +92,7 @@ router.get('/edit/:id(\\d+)', csrfProtection,
         const partId = parseInt(req.params.id, 10);
         const id = partId
         const part = await db.Part.findByPk(partId);
-        const responses = await db.Response.findAll({ where: { partId: id}, order: [['createdAt', 'ASC']] });
+        const responses = await db.Response.findAll({ where: { partId: id}, order: [['id', 'DESC']] });
 
         res.render('part-edit', {
             part,

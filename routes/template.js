@@ -52,6 +52,7 @@ const cloneParts = asyncHandler(async (req, res, next) => {
                 body: part.body,
                 scriptId: req.newScriptId
             });
+            await setTimeout(() => 1000);
             await partObj.save();
             await originalPartIds.push(part.id);
             await newPartIds.push(partObj.id);

@@ -10,7 +10,7 @@ html
     nav(class='navbar navbar-expand-lg' style={"background-color": "#080F5B", "color": "white"})
      div
       a(class='navbar-brand' href='/user' style={"color": "white"}) Script Me App
-      img(src='../public/images/movie-script-white-background.png' style={"max-width": "25px", "max-height": "25px"})
+      img(src='../public/images/script-icon.png' style={"max-width": "25px", "max-height": "25px"})
      if locals.authenticated
          span(class='navbar-text px-4' style={"margin-left": "32px"}) #{user.firstName}
          form(class='form-inline pr-4' action='/user/logout' method='post')

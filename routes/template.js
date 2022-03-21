@@ -99,7 +99,7 @@ router.get('/add/:id(\\d+)', csrfProtection, cloneScript, cloneParts, cloneRespo
 }));
 
 router.get('/', csrfProtection, asyncHandler(async (req, res) => {
-    const scripts = await db.Script.findAll({ where: { userId: 5 }, order: [['title', 'ASC']] });
+    const scripts = await db.Script.findAll({ where: { userId: 6 }, order: [['title', 'ASC']] });
 
     res.render('template-list', { scripts });
 }));
